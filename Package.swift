@@ -5,17 +5,18 @@ import PackageDescription
 
 let package = Package(
     name: "ImageResizerCLI",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "ImageResizerCLI",
-            targets: ["ImageResizerCLI"]),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "ImageResizerCLI"),
-
-    ]
+        platforms: [
+            .macOS(.v13)
+        ],
+        dependencies: [
+            .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0")
+        ],
+        targets: [
+            .executableTarget(
+                name: "ImageResizerCLI",
+                dependencies: [
+                    .product(name: "ArgumentParser", package: "swift-argument-parser")
+                ]
+            )
+        ]
 )
